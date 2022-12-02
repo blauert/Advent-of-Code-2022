@@ -26,7 +26,7 @@ This strategy guide predicts and recommends the following:
 -   In the second round, your opponent will choose Paper (`B`), and you should choose Rock (`X`). This ends in a loss for you with a score of _1_ (1 + 0).
 -   The third round is a draw with both players choosing Scissors, giving you a score of 3 + 3 = _6_.
 
-In this example, if you were to follow the strategy guide, you would get a total score of `_15_` (8 + 1 + 6).
+In this example, if you were to follow the strategy guide, you would get a total score of `15` (8 + 1 + 6).
 
 _What would your total score be if everything goes exactly according to your strategy guide?_
 
@@ -40,6 +40,6 @@ The total score is still calculated in the same way, but now you need to figure 
 -   In the second round, your opponent will choose Paper (`B`), and you choose Rock so you lose (`X`) with a score of 1 + 0 = _1_.
 -   In the third round, you will defeat your opponent's Scissors with Rock for a score of 1 + 6 = _7_.
 
-Now that you're correctly decrypting the ultra top secret strategy guide, you would get a total score of `_12_`.
+Now that you're correctly decrypting the ultra top secret strategy guide, you would get a total score of `12`.
 
 Following the Elf's instructions for the second column, _what would your total score be if everything goes exactly according to your strategy guide?_
