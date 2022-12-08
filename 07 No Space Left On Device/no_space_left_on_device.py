@@ -1,6 +1,8 @@
 # https://adventofcode.com/2022/day/7
 
+import bisect
 from dataclasses import dataclass, field
+from itertools import takewhile
 
 input_file = 'real_input.txt'
 #input_file = 'test_input.txt'
@@ -42,23 +44,22 @@ def build_tree(terminal_output):
 
 
 def folder_sizes(fs):
-    sizes = []
+    sizes_ascending = []
     def size(curr_dir):
         file_sizes = sum(curr_dir.files.values())
         subdir_sizes = sum(size(subdir) for subdir in curr_dir.subdirs.values())
         total_size = file_sizes + subdir_sizes
-        sizes.append(total_size)
+        bisect.insort(sizes_ascending, total_size)
         return total_size
     size(fs)
-    return sizes
+    return sizes_ascending
 
 
 # Part 1
 
 fs = build_tree(terminal_output)
 sizes = folder_sizes(fs)
-
-print(sum(s for s in sizes if s <= 100000))
+print(sum(takewhile(lambda x: x <= 100000, sizes)))
 
 
 # Part 2
@@ -66,7 +67,6 @@ print(sum(s for s in sizes if s <= 100000))
 DISK_SPACE = 70000000
 SPACE_REQUIRED = 30000000
 
-sizes.sort()
 for size in sizes:
     if size + (DISK_SPACE - sizes[-1]) >= SPACE_REQUIRED:
         print(size)
