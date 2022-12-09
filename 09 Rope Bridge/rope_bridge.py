@@ -24,12 +24,21 @@ def move_tail(head_position, tail_position):
     hx, hy = head_position
     tx, ty = tail_position
     if abs(hx - tx) == 2 and abs(hy - ty) == 2:
+        #  . . H      . . H
+        #  . . .  ->  . T .
+        #  T . .      . . .
         tx += (hx - tx) // 2
         ty += (hy - ty) // 2
     elif abs(hx - tx) == 2:
+        #  . . .      . . .        . . .      . . .
+        #  T . H  ->  . T H   or   . . H  ->  . T H
+        #  . . .      . . .        T . .      . . .
         tx += (hx - tx) // 2
         ty = hy
     elif abs(hy - ty) == 2:
+        #  . H .      . H .        . H .      . H .
+        #  . . .  ->  . T .   or   . . .  ->  . T .
+        #  . T .      . . .        T . .      . . .
         ty += (hy - ty) // 2
         tx = hx
     return tx, ty
