@@ -1,14 +1,20 @@
--- Usage:
--- sqlite3
--- sqlite> .read tuning_trouble.sql
+/*
+https://adventofcode.com/2022/day/6
 
-DROP TABLE IF EXISTS tuning_trouble;
-CREATE TABLE tuning_trouble (
+Usage: sqlite> .read tuning_trouble.sql
+*/
+
+DROP TABLE IF EXISTS aoc_input;
+CREATE TABLE aoc_input (
 	signal TEXT
 );
 
---.import test_input.csv tuning_trouble
-.import real_input.csv tuning_trouble
+--.import test_input.csv aoc_input
+.import real_input.csv aoc_input
+
+-- For pretty output
+.headers on
+.mode column
 
 DROP TABLE IF EXISTS parts;
 CREATE TABLE parts (
@@ -18,7 +24,7 @@ CREATE TABLE parts (
 INSERT INTO parts (part) VALUES ('Part 1'), ('Part 2');
 
 WITH
-part1
+part1 (solution)
 AS (
 	WITH distinct_chars (id, char)
 	AS (
@@ -30,7 +36,7 @@ AS (
 				SELECT ROWID, group_concat(signal, '') OVER (
 					ROWS BETWEEN 3 PRECEDING AND CURRENT ROW
 					) AS group_concat
-				FROM tuning_trouble
+				FROM aoc_input
 				)
 			SELECT id, substr(win, 1, 1), substr(win, 2, 1), substr(win, 3, 1), substr(win, 4, 1)
 			FROM windows
@@ -54,7 +60,7 @@ AS (
 	HAVING count(id) = 4
 	LIMIT 1
 	),
-part2
+part2 (solution)
 AS (
 	WITH distinct_chars (id, char)
 	AS (
@@ -66,7 +72,7 @@ AS (
 				SELECT ROWID, group_concat(signal, '') OVER (
 					ROWS BETWEEN 13 PRECEDING AND CURRENT ROW
 					) AS group_concat
-				FROM tuning_trouble
+				FROM aoc_input
 				)
 			SELECT id, substr(win, 1, 1), substr(win, 2, 1), substr(win, 3, 1), substr(win, 4, 1),
 					substr(win, 5, 1), substr(win, 6, 1), substr(win, 7, 1), substr(win, 8, 1),
