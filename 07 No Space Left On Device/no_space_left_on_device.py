@@ -1,8 +1,7 @@
 # https://adventofcode.com/2022/day/7
 
-import bisect
+import heapq
 from dataclasses import dataclass, field
-from itertools import takewhile
 
 input_file = 'real_input.txt'
 #input_file = 'test_input.txt'
@@ -49,17 +48,26 @@ def folder_sizes(fs):
         file_sizes = sum(curr_dir.files.values())
         subdir_sizes = sum(size(subdir) for subdir in curr_dir.subdirs.values())
         total_size = file_sizes + subdir_sizes
-        bisect.insort(sizes_ascending, total_size)
+        heapq.heappush(sizes_ascending, total_size)
         return total_size
-    size(fs)
-    return sizes_ascending
+    root_size = size(fs)
+    return sizes_ascending, root_size
 
 
 # Part 1
 
 fs = build_tree(terminal_output)
-sizes = folder_sizes(fs)
-print(sum(takewhile(lambda x: x <= 100000, sizes)))
+sizes_sorted, root_size = folder_sizes(fs)
+
+sizes = sizes_sorted.copy()
+sum_under_100k = 0
+while True:
+    curr = heapq.heappop(sizes)
+    if curr <= 100000:
+        sum_under_100k += curr
+    else:
+        break
+print(sum_under_100k)
 
 
 # Part 2
@@ -67,7 +75,9 @@ print(sum(takewhile(lambda x: x <= 100000, sizes)))
 DISK_SPACE = 70000000
 SPACE_REQUIRED = 30000000
 
-for size in sizes:
-    if size + (DISK_SPACE - sizes[-1]) >= SPACE_REQUIRED:
+sizes = sizes_sorted.copy()
+while True:
+    size = heapq.heappop(sizes)
+    if size + (DISK_SPACE - root_size) >= SPACE_REQUIRED:
         print(size)
         break
