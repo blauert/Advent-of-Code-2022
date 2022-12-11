@@ -6,6 +6,16 @@ Usage: sqlite> .read tuning_trouble.sql
 
 DROP TABLE IF EXISTS aoc_input;
 CREATE TABLE aoc_input (
+/*
+signal
+------
+m
+j
+q
+j
+p
+---snip---
+*/
 	signal TEXT
 );
 
@@ -18,9 +28,14 @@ CREATE TABLE aoc_input (
 
 DROP TABLE IF EXISTS parts;
 CREATE TABLE parts (
+/*
+part
+------
+Part 1
+Part 2
+*/
 	part TEXT
 );
-
 INSERT INTO parts (part) VALUES ('Part 1'), ('Part 2');
 
 WITH
@@ -36,9 +51,28 @@ AS (
 				SELECT ROWID, group_concat(signal, '') OVER (
 					ROWS BETWEEN 3 PRECEDING AND CURRENT ROW
 					) AS group_concat
+				/*
+				rowid  group_concat
+				-----  ------------
+				1      m
+				2      mj
+				3      mjq
+				4      mjqj
+				5      jqjp
+				---snip---
+				*/
 				FROM aoc_input
 				)
 			SELECT id, substr(win, 1, 1), substr(win, 2, 1), substr(win, 3, 1), substr(win, 4, 1)
+			/*
+			id  substr(win, 1, 1)  substr(win, 2, 1)  substr(win, 3, 1)  substr(win, 4, 1)
+			--  -----------------  -----------------  -----------------  -----------------
+			4   m                  j                  q                  j
+			5   j                  q                  j                  p
+			6   q                  j                  p                  q
+			7   j                  p                  q                  m
+			---snip---
+			*/
 			FROM windows
 			WHERE id > 3
 			)
@@ -55,6 +89,11 @@ AS (
 		FROM chars
 		)
 	SELECT id
+	/*
+	id
+	--
+	7
+	*/
 	FROM distinct_chars
 	GROUP BY id
 	HAVING count(id) = 4
@@ -130,6 +169,12 @@ AS (
 	LIMIT 1
 	)
 SELECT *
+/*
+part    solution
+------  --------
+Part 1  7
+Part 2  19
+*/
 FROM parts JOIN part1
 ON parts.ROWID = 1
 UNION
