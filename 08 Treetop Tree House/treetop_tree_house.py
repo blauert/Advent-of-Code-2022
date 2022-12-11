@@ -56,13 +56,12 @@ print(len(visible_trees))
 # Part 2
 
 def scenic_scores_1d(trees):
-    view_left = {}
+    scenic_scores = {}
     heights_left = {i: 0 for i in range(10)}
-    view_right = {}
     view_right_temp = {}
     for i, tree in enumerate(trees):
         # View to the left
-        view_left[tree] = i - heights_left[tree.height]
+        scenic_scores[tree] = i - heights_left[tree.height]
         for h in range(tree.height+1):
             heights_left[h] = i
         # View to the right
@@ -73,12 +72,10 @@ def scenic_scores_1d(trees):
                 done.append(tr)
         view_right_temp[tree] = 0
         for tr in done:
-            view_right[tr] = view_right_temp.pop(tr)
-    view_right.update(view_right_temp)
-    # Calculate one-dimensional scenic score
-    scenic_scores = {}
-    for tree, left_view in view_left.items():
-        scenic_scores[tree] = view_right[tree] * left_view
+            scenic_scores[tr] *= view_right_temp.pop(tr)
+    for tr, v in view_right_temp.items():
+        scenic_scores.setdefault(tr, 0)
+        scenic_scores[tr] *= v
     return scenic_scores
 
 
