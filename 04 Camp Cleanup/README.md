@@ -1,8 +1,8 @@
 # Day 4: Camp Cleanup
 
-Space needs to be cleared before the last supplies can be unloaded from the ships, and so several Elves have been assigned the job of cleaning up sections of the camp. Every section has a unique _ID number_, and each Elf is assigned a range of section IDs.
+Space needs to be cleared before the last supplies can be unloaded from the ships, and so several Elves have been assigned the job of cleaning up sections of the camp. Every section has a unique __ID number__, and each Elf is assigned a range of section IDs.
 
-However, as some of the Elves compare their section assignments with each other, they've noticed that many of the assignments _overlap_. To try to quickly find overlaps and reduce duplicated effort, the Elves pair up and make a _big list of the section assignments for each pair_ (your puzzle input).
+However, as some of the Elves compare their section assignments with each other, they've noticed that many of the assignments __overlap__. To try to quickly find overlaps and reduce duplicated effort, the Elves pair up and make a __big list of the section assignments for each pair__ (your puzzle input).
 
 For example, consider the following list of section assignment pairs:
 
@@ -43,13 +43,13 @@ This example list uses single-digit section IDs to make it easier to draw; your 
 ...45678.  4-8
 ```
 
-Some of the pairs have noticed that one of their assignments _fully contains_ the other. For example, `2-8` fully contains `3-7`, and `6-6` is fully contained by `4-6`. In pairs where one assignment fully contains the other, one Elf in the pair would be exclusively cleaning sections their partner will already be cleaning, so these seem like the most in need of reconsideration. In this example, there are `2` such pairs.
+Some of the pairs have noticed that one of their assignments __fully contains__ the other. For example, `2-8` fully contains `3-7`, and `6-6` is fully contained by `4-6`. In pairs where one assignment fully contains the other, one Elf in the pair would be exclusively cleaning sections their partner will already be cleaning, so these seem like the most in need of reconsideration. In this example, there are `2` such pairs.
 
-_In how many assignment pairs does one range fully contain the other?_
+__In how many assignment pairs does one range fully contain the other?__
 
 ## Part Two
 
-It seems like there is still quite a bit of duplicate work planned. Instead, the Elves would like to know the number of pairs that _overlap at all_.
+It seems like there is still quite a bit of duplicate work planned. Instead, the Elves would like to know the number of pairs that __overlap at all__.
 
 In the above example, the first two pairs (`2-4,6-8` and `2-3,4-5`) don't overlap, while the remaining four pairs (`5-7,7-9`, `2-8,3-7`, `6-6,4-6`, and `2-6,4-8`) do overlap:
 
@@ -60,4 +60,4 @@ In the above example, the first two pairs (`2-4,6-8` and `2-3,4-5`) don't over
 
 So, in this example, the number of overlapping assignment pairs is `4`.
 
-_In how many assignment pairs do the ranges overlap?_
+__In how many assignment pairs do the ranges overlap?__
