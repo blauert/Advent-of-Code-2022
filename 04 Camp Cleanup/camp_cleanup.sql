@@ -13,6 +13,8 @@ CREATE TABLE aoc_input (
 	elf2_end INTEGER
 );
 
+.mode csv
+
 --.import test_input.csv aoc_input
 .import real_input.csv aoc_input
 
