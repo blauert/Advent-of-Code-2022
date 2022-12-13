@@ -9,7 +9,7 @@ https://adventofcode.com/2022
 |  4  | ⭐⭐ |       | ⭐⭐ |  |
 |  5  | ⭐⭐ |       |       |  |
 |  6  | ⭐⭐ | ⭐⭐ | ⭐⭐ |  |
-|  7  | ⭐⭐ | ⭐⭐ |       | Walking directory tree |
+|  7  | ⭐⭐ | ⭐⭐ |       | Walking directory tree & @dataclass |
 |  8  | ⭐⭐ | ⭐⭐ |       | Looking backwards and forwards |
 |  9  | ⭐⭐ |       |       | Rope tail follows head |
 | 10  | ⭐⭐ |       |       |  |
