@@ -87,6 +87,24 @@ AS (
 		UNION
 		SELECT id, c4
 		FROM chars
+		/*
+		id  c1
+		--  --
+		4   j
+		4   m
+		4   q
+		5   j
+		5   p
+		5   q
+		6   j
+		6   p
+		6   q
+		7   j
+		7   m
+		7   p
+		7   q
+		---snip---
+		*/
 		)
 	SELECT id
 	/*
