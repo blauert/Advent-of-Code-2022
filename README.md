@@ -1,7 +1,7 @@
 # Advent of Code 2022
 https://adventofcode.com/2022
 
-| Day |  .py  |  .js  | .sql  | Notes |
+| Day |  .py  |  .js  | .sql  | Notes ✏️ |
 |:---:|:-----:|:-----:|:-----:|:------|
 |  1  | ⭐⭐ |       | ⭐⭐ |  |
 |  2  | ⭐⭐ |       | ⭐⭐ |  |
