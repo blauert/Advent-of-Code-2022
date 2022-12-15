@@ -9,7 +9,7 @@ https://adventofcode.com/2022
 |[4](./04%20Camp%20Cleanup)|⭐⭐||⭐⭐||
 |[5](./05%20Supply%20Stacks/)|⭐⭐||||
 |[6](./06%20Tuning%20Trouble/)|⭐⭐|⭐⭐|⭐⭐||
-|[7](./07%20No%20Space%20Left%20On%20Device/)|⭐⭐|⭐⭐||Walking directory tree; @dataclass|
+|[7](./07%20No%20Space%20Left%20On%20Device/)|⭐⭐|⭐⭐||Tree; @dataclass|
 |[8](./08%20Treetop%20Tree%20House/)|⭐⭐|⭐⭐||Looking backwards and forwards 🌳|
 |[9](./09%20Rope%20Bridge/)|⭐⭐|||Rope tail follows head|
 |[10](./10%20Cathode-Ray%20Tube/)|⭐⭐|||📺|
