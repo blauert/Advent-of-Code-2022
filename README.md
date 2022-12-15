@@ -15,6 +15,6 @@ https://adventofcode.com/2022
 |[10](./10%20Cathode-Ray%20Tube/)|⭐⭐|||📺|
 |[11](./11%20Monkey%20in%20the%20Middle/)|⭐⭐|||Closure|
 |[12](./12%20Hill%20Climbing%20Algorithm/)|⭐⭐|||Dijkstra's algorithm|
-|[13](./13%20Distress%20Signal/)|⭐⭐|||yield; functools cmp_to_key|
+|[13](./13%20Distress%20Signal/)|⭐⭐|||yield & chain; functools.cmp_to_key|
 |[14](.)|||||
 |[15](.)|||||
