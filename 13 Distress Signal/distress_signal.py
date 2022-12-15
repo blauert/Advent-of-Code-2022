@@ -2,6 +2,7 @@
 
 import json
 from functools import cmp_to_key
+from itertools import chain
 
 input_file = 'real_input.txt'
 #input_file = 'test_input.txt'
@@ -26,9 +27,9 @@ def zip_shortest_longest(left, right):
 
 
 def check_order(packets):
-    stack = [i for i in reversed(list(zip_shortest_longest(*packets)))]
+    stack = zip_shortest_longest(*packets)
     while stack:
-        left, right = stack.pop()
+        left, right = next(stack)
         if left is None:
             return True
         if right is None:
@@ -43,11 +44,8 @@ def check_order(packets):
         elif isinstance(right, int):
             right = [right]
         if isinstance(left, list) and isinstance(right, list):
-            q = []
-            for l, r in zip_shortest_longest(left, right):
-                q.append((l, r))
-            for pair in reversed(q):
-                stack.append(pair)
+            # https://docs.python.org/3/library/itertools.html#itertools.chain
+            stack = chain(zip_shortest_longest(left, right), stack)
 
 
 # https://docs.python.org/3/library/functools.html#functools.cmp_to_key
