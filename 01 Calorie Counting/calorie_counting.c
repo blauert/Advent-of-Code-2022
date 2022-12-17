@@ -1,9 +1,8 @@
 // https://adventofcode.com/2022/day/1
 // Run: $ make
 
-// https://en.cppreference.com/w/cpp/header/cstdio
+// https://en.cppreference.com/w/c/header
 #include <stdio.h>
-// https://en.cppreference.com/w/cpp/header/cstdlib
 #include <stdlib.h>
 
 int cmpfunc (const void * a, const void * b) {
@@ -11,7 +10,7 @@ int cmpfunc (const void * a, const void * b) {
 }
 
 int main(void) {
-    // https://en.cppreference.com/w/cpp/io/c/fopen
+    // https://en.cppreference.com/w/c/io/fopen
     FILE *fp = fopen("real_input.txt", "r");
     //FILE *fp = fopen("test_input.txt", "r");
 
@@ -47,9 +46,7 @@ int main(void) {
             sum += num;
         }
     }
-
     fclose(fp);
-
 
     // Part 1
 
@@ -65,6 +62,5 @@ int main(void) {
     for (uint i = 0; i < 3; i++) {
         sum_max3 += sums[i];
     }
-
     printf("Part 2: %d\n", sum_max3);
 }
