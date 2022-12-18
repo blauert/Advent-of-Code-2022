@@ -27,7 +27,7 @@ int main(void) {
     uint max = 0;
     //// Array of all sums
     uint sums[1000];
-    uint index = 0;
+    uint len_sums = 0;
 
     while (1) {
         // https://en.cppreference.com/w/c/io/fgets
@@ -35,9 +35,9 @@ int main(void) {
 
         if (!cp || *cp == '\r') {
             if (sum > max) max = sum;
-            sums[index] = sum;
+            sums[len_sums] = sum;
             if (!cp) break;
-            index += 1;
+            len_sums += 1;
             sum = 0;
         }
         else {
@@ -56,7 +56,7 @@ int main(void) {
     // Part 2
 
     // https://en.cppreference.com/w/c/algorithm/qsort
-    qsort(sums, index+1, sizeof(int), cmpfunc);
+    qsort(sums, len_sums+1, sizeof(int), cmpfunc);
 
     uint sum_max3 = 0;
     for (uint i = 0; i < 3; i++) {
