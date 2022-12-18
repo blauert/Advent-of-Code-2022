@@ -68,7 +68,10 @@ for direction, steps in motions:
     for i in range(int(steps)):
         knots[0] = move_head(knots[0], direction)
         for i in range(1, 10):
-            knots[i] = move_tail(knots[i-1], knots[i])
+            new_pos = move_tail(knots[i-1], knots[i])
+            if knots[i] == new_pos:  # No need to calculate following knots
+                break
+            knots[i] = new_pos
         tail_visited.add(knots[9])
 
 print(len(tail_visited))
