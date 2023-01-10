@@ -5,7 +5,7 @@ https://adventofcode.com/2022
 |:--:|:--:|:--:|:--:|:--:|:--:|:---|
 |[1](./01%20Calorie%20Counting/)|⭐⭐||⭐⭐|⭐⭐|⭐⭐||
 |[2](./02%20Rock%20Paper%20Scissors/)|⭐⭐||⭐⭐|⭐⭐|||
-|[3](./03%20Rucksack%20Reorganization/)|⭐⭐||⭐⭐|💫||SQL: Recursive string splitting|
+|[3](./03%20Rucksack%20Reorganization/)|⭐⭐||⭐⭐|💫|⭐⭐|SQL: Recursive string splitting|
 |[4](./04%20Camp%20Cleanup)|⭐⭐||⭐⭐||||
 |[5](./05%20Supply%20Stacks/)|⭐⭐||||||
 |[6](./06%20Tuning%20Trouble/)|⭐⭐|⭐⭐|⭐⭐||||
