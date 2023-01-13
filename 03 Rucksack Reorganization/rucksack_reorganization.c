@@ -73,19 +73,23 @@ int part2(FILE *fp) {
 }
 
 int main(void) {
-    //char input_file[] = "test_input.txt";
+    /*
+    char input_file[] = "test_input.txt";
+    */
     char input_file[] = "real_input.txt";
 
     // https://en.cppreference.com/w/c/io/fopen
-    FILE *fp = fopen(input_file, "r");
+    FILE *fp;
+    
+    fp = fopen(input_file, "r");
     int solution1 = part1(fp);
     printf("Part 1: %d\n", solution1);
     fclose(fp);
 
-    FILE *fp2 = fopen(input_file, "r");
-    int solution2 = part2(fp2);
+    fp = fopen(input_file, "r");
+    int solution2 = part2(fp);
     printf("Part 2: %d\n", solution2);
-    fclose(fp2);
+    fclose(fp);
 
     exit(EXIT_SUCCESS);
 }
