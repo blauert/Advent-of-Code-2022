@@ -80,16 +80,15 @@ int main(void) {
 
     // https://en.cppreference.com/w/c/io/fopen
     FILE *fp;
-    
     fp = fopen(input_file, "r");
-    int solution1 = part1(fp);
-    printf("Part 1: %d\n", solution1);
-    fclose(fp);
 
-    fp = fopen(input_file, "r");
-    int solution2 = part2(fp);
-    printf("Part 2: %d\n", solution2);
-    fclose(fp);
+    printf("Part 1: %d\n", part1(fp));
 
+    // https://en.cppreference.com/w/c/io/rewind
+    rewind(fp);
+
+    printf("Part 2: %d\n", part2(fp));
+
+    fclose(fp);
     exit(EXIT_SUCCESS);
 }
