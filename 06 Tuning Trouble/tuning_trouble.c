@@ -20,10 +20,7 @@ int distinct_chars(FILE* fp, int num_chars) {
         if (countmap[c-'a'] == 1) {
             unique_chars++;
         }
-        else if (countmap[c-'a'] == 2) {
-            unique_chars--;
-        }
-
+        
         if (curr_char > num_chars) {
             // drop one char
             fseek(fp, -num_chars-1, SEEK_CUR);
@@ -32,9 +29,6 @@ int distinct_chars(FILE* fp, int num_chars) {
             if (countmap[c-'a'] == 0) {
                 unique_chars--;
                 }
-            else if (countmap[c-'a'] == 1) {
-                unique_chars++;
-            }
             fseek(fp, num_chars, SEEK_CUR);
         }
         if (unique_chars >= num_chars) {
