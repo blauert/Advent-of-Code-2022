@@ -150,7 +150,9 @@ async function cpu() {
 
         removeSprite(sprite);
         sprite = getSpritePosition(x, cycle);
-        printSprite(sprite);
+        if (sprite <= 239) {
+            printSprite(sprite);
+        }
 
 
         if (ins != "noop") {
@@ -165,7 +167,9 @@ async function cpu() {
             
             removeSprite(sprite);
             sprite = getSpritePosition(x, cycle);
-            printSprite(sprite);
+            if (sprite <= 239) {
+                printSprite(sprite);
+            }
 
         }
     }
