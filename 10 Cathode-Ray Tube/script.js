@@ -1,3 +1,5 @@
+// https://adventofcode.com/2022/day/10
+
 function printPixel(pixel) {
     document.getElementById("p" + pixel).innerText = '#';
 }
@@ -135,45 +137,45 @@ async function* getInstructions() {
     };
 }
 
-async function cpu() {
+async function cpu(clock) {
+    if (isPrintable(cycle, sprite)) {
+        printPixel(cycle-1);
+    }
+
+    await clock.next().then(tick => setCycle(cycle + tick.value));
+
+    if (part1cycles.has(cycle)) {
+        part1solution += (cycle * x);
+    }
+    
+    removeSprite(sprite);
+    sprite = getSpritePosition(x, cycle);
+    if (sprite <= 239) {
+        printSprite(sprite);
+    }
+}
+
+async function main() {
     const instr = getInstructions();
     const clock = clockCircuit();
 
     for await (const ins of instr) {
         printInstruction(ins);
         
-        if (isPrintable(cycle, sprite)) {
-            printPixel(cycle-1);
-        }
-
-        await clock.next().then(tick => setCycle(cycle + tick.value));
-
-        removeSprite(sprite);
-        sprite = getSpritePosition(x, cycle);
-        if (sprite <= 239) {
-            printSprite(sprite);
-        }
-
+        await cpu(clock);
 
         if (ins != "noop") {
             x += Number(ins.split(' ')[1]);
             printX(x);
             
-            if (isPrintable(cycle, sprite)) {
-                printPixel(cycle-1);
-            }
-
-            await clock.next().then(tick => setCycle(cycle + tick.value));
-            
-            removeSprite(sprite);
-            sprite = getSpritePosition(x, cycle);
-            if (sprite <= 239) {
-                printSprite(sprite);
-            }
-
+            await cpu(clock);
         }
     }
+    console.log("Part 1: " + part1solution)
 }
+
+const part1cycles = new Set([20, 60, 100, 140, 180, 220]);
+let part1solution = 0;
 
 let x = 1;
 let cycle = 1;
@@ -190,4 +192,4 @@ const path = "https://raw.githubusercontent.com/blauert/Advent-of-Code-2022/mast
 const input_file = "real_input.txt";
 //const input_file = "test_input.txt";
 
-cpu();
+main();
