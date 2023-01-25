@@ -17,4 +17,4 @@ https://adventofcode.com/2022
 |[12](./12%20Hill%20Climbing%20Algorithm/)|⭐⭐|||||Dijkstra's algorithm|
 |[13](./13%20Distress%20Signal/)|⭐⭐|||||Chaining generators; cmp_to_key|
 |[14](./14%20Regolith%20Reservoir/)|⭐⭐||||||
-|[15](./15%20Beacon%20Exclusion%20Zone/)|⭐||||||
+|[15](./15%20Beacon%20Exclusion%20Zone/)|⭐🕳️||||||
