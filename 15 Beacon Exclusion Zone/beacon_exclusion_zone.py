@@ -1,6 +1,7 @@
 # https://adventofcode.com/2022/day/15
 
 import re
+import shapely
 
 INPUT_FILE = 'real_input.txt'
 #INPUT_FILE = 'test_input.txt'
@@ -39,7 +40,7 @@ def row_positions(x_center, row, number):
 
 ## Part 1
 
-def part1():
+def part1_slow():
     target_row_positions = set()
     beacons_in_target_row = set()
 
@@ -57,8 +58,35 @@ def part1():
 
     print(f"Part 1: {len(target_row_positions)}")
 
-part1()
-
 
 ## Part 2
 
+def part2():
+    area = shapely.Polygon([(0, 0), (MAX_XY, 0), (MAX_XY, MAX_XY), (0, MAX_XY)])
+    scan_areas = []
+
+    for sensor, beacon in SCANS:
+        x, y = sensor
+        md = manhattan_distance(sensor, beacon)
+        top = (x, y-md)
+        bottom = (x, y+md)
+        left = (x-md, y)
+        right = (x+md, y)
+        scan_area = shapely.Polygon([top, right, bottom, left])
+        scan_areas.append(scan_area)
+
+    # https://shapely.readthedocs.io/en/stable/set_operations.html
+    scanned_area = shapely.unary_union(scan_areas)
+    unscanned_area = shapely.difference(area, scanned_area)
+
+    if isinstance(unscanned_area, shapely.MultiPolygon):  # this happens in the test case
+        distress_beacon = unscanned_area.geoms[0].centroid
+    else:
+        distress_beacon = unscanned_area.centroid
+
+    print(f"Part 2: {int(distress_beacon.x * 4000000 + distress_beacon.y)}")
+
+
+if __name__ == "__main__":
+    part1_slow()
+    part2()
