@@ -38,7 +38,7 @@ def row_positions(x_center, row, number):
     return positions
 
 
-## Part 1
+## Part 1 (slow)
 
 def part1_slow():
     target_row_positions = set()
@@ -59,24 +59,35 @@ def part1_slow():
     print(f"Part 1: {len(target_row_positions)}")
 
 
-## Part 2
+## Solution using Shapely
+
+beacons_in_target_row = set()
+scan_areas = []
+
+for sensor, beacon in SCANS:
+    if beacon[1] == TARGET_ROW:
+        beacons_in_target_row.add(beacon)
+    x, y = sensor
+    md = manhattan_distance(sensor, beacon)
+    top = (x, y-md)
+    bottom = (x, y+md)
+    left = (x-md, y)
+    right = (x+md, y)
+    scan_area = shapely.Polygon([top, right, bottom, left])
+    scan_areas.append(scan_area)
+
+# https://shapely.readthedocs.io/en/stable/set_operations.html
+scanned_area = shapely.unary_union(scan_areas)
+
+
+def part1():
+    line = shapely.LineString([(scanned_area.bounds[0], TARGET_ROW), (scanned_area.bounds[2], TARGET_ROW)])
+    intersection = shapely.unary_union(line.intersection(scanned_area))
+
+    print(f"Part 1: {int(intersection.length + 1 - len(beacons_in_target_row))}")
+
 
 def part2():
-    scan_areas = []
-
-    for sensor, beacon in SCANS:
-        x, y = sensor
-        md = manhattan_distance(sensor, beacon)
-        top = (x, y-md)
-        bottom = (x, y+md)
-        left = (x-md, y)
-        right = (x+md, y)
-        scan_area = shapely.Polygon([top, right, bottom, left])
-        scan_areas.append(scan_area)
-
-    # https://shapely.readthedocs.io/en/stable/set_operations.html
-    scanned_area = shapely.unary_union(scan_areas)
-
     search_area = shapely.Polygon([(0, 0), (MAX_XY, 0), (MAX_XY, MAX_XY), (0, MAX_XY)])
     # buffer to leave no gap between neigboring but not overlapping areas
     unscanned_area = shapely.difference(search_area, scanned_area.buffer(0.5))
@@ -86,5 +97,6 @@ def part2():
 
 
 if __name__ == "__main__":
-    part1_slow()
+    #part1_slow()
+    part1()
     part2()
