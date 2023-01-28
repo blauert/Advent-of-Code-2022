@@ -62,7 +62,6 @@ def part1_slow():
 ## Part 2
 
 def part2():
-    area = shapely.Polygon([(0, 0), (MAX_XY, 0), (MAX_XY, MAX_XY), (0, MAX_XY)])
     scan_areas = []
 
     for sensor, beacon in SCANS:
@@ -77,12 +76,11 @@ def part2():
 
     # https://shapely.readthedocs.io/en/stable/set_operations.html
     scanned_area = shapely.unary_union(scan_areas)
-    unscanned_area = shapely.difference(area, scanned_area)
 
-    if isinstance(unscanned_area, shapely.MultiPolygon):  # this happens in the test case
-        distress_beacon = unscanned_area.geoms[0].centroid
-    else:
-        distress_beacon = unscanned_area.centroid
+    search_area = shapely.Polygon([(0, 0), (MAX_XY, 0), (MAX_XY, MAX_XY), (0, MAX_XY)])
+    # buffer to leave no gap between neigboring but not overlapping areas
+    unscanned_area = shapely.difference(search_area, scanned_area.buffer(0.5))
+    distress_beacon = unscanned_area.centroid
 
     print(f"Part 2: {int(distress_beacon.x * 4000000 + distress_beacon.y)}")
 
