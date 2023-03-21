@@ -24,6 +24,32 @@ for valve in SCANS:
     TUNNELS[valve[0]] = valve[2]
 
 
+# Thanks ChatGPT
+graph = TUNNELS
+
+# Create a dictionary to hold the distances between each pair of nodes
+distances = {}
+
+# Initialize the distances between nodes that have an edge between them
+for node1 in graph:
+    for node2 in graph[node1]:
+        distances[(node1, node2)] = 1
+
+# Run the Floyd-Warshall algorithm to compute the shortest distance between all pairs of nodes
+for k in graph:
+    for i in graph:
+        for j in graph:
+            if (i, j) not in distances:
+                distances[(i, j)] = float('inf')
+            if (i, k) in distances and (k, j) in distances:
+                distances[(i, j)] = min(distances[(i, j)], distances[(i, k)] + distances[(k, j)])
+
+# Print the distances between each pair of nodes
+#for node1 in graph:
+#    for node2 in graph:
+#        print(f"Distance between {node1} and {node2}: {distances.get((node1, node2), float('inf'))}")
+
+
 @dataclass
 class Path:
     valves_to_open: set
@@ -38,20 +64,16 @@ class Path:
         self._calculate_potential()
     
     def _calculate_potential(self):
-        # Used for pruning. Should probably use Floyd–Warshall to get times between any two valves
-        remaining_rates = sorted(rate for v, rate in FLOW_RATES.items() if v in self.valves_to_open)
+        # Used for pruning.
         potential = 0
-        if len(remaining_rates) > 0:
-            for i in range(self.time_remaining-2, 0, -2):
-                curr = remaining_rates.pop()
-                potential += (self.time_remaining-2) * curr
-                if len(remaining_rates) == 0:
-                    break
+        for valve in self.valves_to_open:
+            if self.time_remaining > distances[(self.curr_position, valve)]:
+                potential += (self.time_remaining - distances[(self.curr_position, valve)]) * FLOW_RATES[valve]
         self.potential = potential
     
     def _count_down(self):
-        self.time_remaining -= 1
         self._calculate_potential()
+        self.time_remaining -= 1
     
     def walk_tunnel(self, new_position):
         self.curr_position = new_position
@@ -103,4 +125,4 @@ def part1_slow():
 
 
 if __name__ == "__main__":
-    part1_slow()  # time to run: 25sec
+    part1_slow()
