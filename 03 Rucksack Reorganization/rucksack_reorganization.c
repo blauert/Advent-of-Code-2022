@@ -35,6 +35,7 @@ int part1(FILE *fp) {
             }
         }
     }
+    free(line);
     return prio_sum;
 }
 
@@ -69,6 +70,7 @@ int part2(FILE *fp) {
                 }
             }
         }
+    free(line);
     return prio_sum;
 }
 

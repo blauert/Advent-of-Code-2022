@@ -11,6 +11,7 @@ size_t get_num_stacks(FILE *fp) {
     size_t len = 0;
     ssize_t read;
     read = getline(&line, &len, fp);
+    free(line);
     rewind(fp);
 
     size_t num_stacks = (read - 1) / 4;
@@ -24,7 +25,10 @@ void fill_stacks(FILE *fp, char *stacks[], size_t stacks_lens[]) {
     ssize_t read;
 
     while ((read = getline(&line, &len, fp)) != -1) {
-        if (isdigit(line[1])) return;
+        if (isdigit(line[1])) {
+            free(line); // Free memory allocated by getline before returning
+            return;
+        }
         int curr_len = line[read-1] == '\n' ? read - 2 : read;
 
         int i = 0;
@@ -36,6 +40,8 @@ void fill_stacks(FILE *fp, char *stacks[], size_t stacks_lens[]) {
             }
             i++;
         }
+        free(line); // Free memory allocated by getline after use
+        line = NULL; // Reset line pointer to NULL
     }
 }
 
@@ -107,6 +113,7 @@ size_t get_instructions(FILE *fp, int **instr) {
         (*instr)[curr_idx] = to;
         curr_idx++;
     }
+    free(line);
     return num_instr;
 }
 
